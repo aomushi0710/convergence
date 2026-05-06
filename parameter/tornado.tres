@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Parameter" load_steps=2 format=3 uid="uid://c2ytvxxqwqnpg"]
+
+[ext_resource type="Script" uid="uid://bslyyv4a5jomd" path="res://resource/parameter.gd" id="1_tu05b"]
+
+[resource]
+script = ExtResource("1_tu05b")
+type = 2
+name = "トルネード"
+color_name = "green"
+description = "発射時の回転力を強化する
+(MAX 99)"
+base_cost = 5
+factor = 1.15
+calc_type = 0
+base_value = 500.0
+growth_value = 100.0
+max_level = 99
+metadata/_custom_type_script = "uid://bslyyv4a5jomd"

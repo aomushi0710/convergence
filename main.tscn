@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://nbnyay4n2xc0"]
+
+[ext_resource type="Script" uid="uid://cxbywr1dj8v5r" path="res://title.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://dtvrgbdtvo4pv" path="res://asset/title.png" id="1_ig7tw"]
+[ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="3_h2yge"]
+
+[node name="Title" type="Node2D" node_paths=PackedStringArray("camera_2d")]
+script = ExtResource("1_0xm2m")
+camera_2d = NodePath("Camera2D")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -300.0
+offset_right = 2220.0
+offset_bottom = 1080.0
+texture = ExtResource("1_ig7tw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 710.0
+offset_top = 1007.0
+offset_right = 1210.0
+offset_bottom = 1080.0
+theme = ExtResource("3_h2yge")
+bbcode_enabled = true
+text = "(C) 2026 aomushi0710"
+fit_content = true
+autowrap_mode = 0

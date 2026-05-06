@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Parameter" load_steps=2 format=3 uid="uid://bmppc8kdkl7l7"]
+
+[ext_resource type="Script" uid="uid://bslyyv4a5jomd" path="res://resource/parameter.gd" id="1_m5e8t"]
+
+[resource]
+script = ExtResource("1_m5e8t")
+type = 0
+name = "収束"
+color_name = "yellow"
+description = "頂点の数を増やして
+丸に収束させる (MAX 29)"
+base_cost = 0
+factor = 20.0
+calc_type = 2
+base_value = 4.0
+growth_value = 1.0
+max_level = 29
+metadata/_custom_type_script = "uid://bslyyv4a5jomd"

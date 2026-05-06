@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://2i73arvgbv3e"]
+
+[ext_resource type="Script" uid="uid://dfpl3l5220ox4" path="res://component/rolling_shape.gd" id="1_jsvno"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jsvno"]
+bounce = 0.2
+
+[node name="RollingShape" type="RigidBody2D" node_paths=PackedStringArray("line_2d", "polygon_2d", "collision_polygon_2d")]
+physics_material_override = SubResource("PhysicsMaterial_jsvno")
+linear_damp = 1.0
+angular_damp = 1.0
+script = ExtResource("1_jsvno")
+line_2d = NodePath("Line2D")
+polygon_2d = NodePath("Polygon2D")
+collision_polygon_2d = NodePath("CollisionPolygon2D")
+
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(35.3553, 35.3553, -35.3553, 35.3553, -35.3553, -35.3553, 35.3553, -35.3553)
+closed = true
+width = 5.0
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(35.3553, 35.3553, -35.3553, 35.3553, -35.3553, -35.3553, 35.3553, -35.3553)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(35.3553, 35.3553, -35.3553, 35.3553, -35.3553, -35.3553, 35.3553, -35.3553)
+
+[connection signal="run_finished" from="." to="." method="_on_run_finished"]

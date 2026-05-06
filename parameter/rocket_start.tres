@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Parameter" load_steps=2 format=3 uid="uid://oudqr82sk32h"]
+
+[ext_resource type="Script" uid="uid://bslyyv4a5jomd" path="res://resource/parameter.gd" id="1_073ro"]
+
+[resource]
+script = ExtResource("1_073ro")
+type = 1
+name = "ロケットスタート"
+color_name = "red"
+description = "発射力を強化する
+(MAX 99)"
+base_cost = 5
+factor = 1.15
+calc_type = 0
+base_value = 1000.0
+growth_value = 200.0
+max_level = 99
+metadata/_custom_type_script = "uid://bslyyv4a5jomd"

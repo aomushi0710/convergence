@@ -1,0 +1,121 @@
+[gd_scene load_steps=16 format=3 uid="uid://dew72b5qrawv0"]
+
+[ext_resource type="PackedScene" uid="uid://2i73arvgbv3e" path="res://rolling_shape.tscn" id="1_6eo5e"]
+[ext_resource type="Script" uid="uid://c0mcr44uv382o" path="res://component/stage.gd" id="1_rnkuw"]
+[ext_resource type="Script" uid="uid://bn3udicqwxqgn" path="res://stage_camera.gd" id="3_16g40"]
+[ext_resource type="Script" uid="uid://tpb63dj4o813" path="res://stage_ui.gd" id="3_gx6sy"]
+[ext_resource type="Script" uid="uid://dd5gcump4xjci" path="res://component/distance_ruler.gd" id="5_16g40"]
+[ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="6_vpggq"]
+
+[sub_resource type="Gradient" id="Gradient_rnkuw"]
+offsets = PackedFloat32Array(0, 0.2, 0.5, 0.8)
+colors = PackedColorArray(0, 0.501961, 1, 1, 1, 0.501961, 0, 1, 0, 0, 0.501961, 1, 0, 0, 0.15, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gx6sy"]
+gradient = SubResource("Gradient_rnkuw")
+fill_from = Vector2(0, 0.059633)
+
+[sub_resource type="Gradient" id="Gradient_vpggq"]
+colors = PackedColorArray(0, 0, 0, 0.501961, 1, 1, 1, 0.501961)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1edn8"]
+gradient = SubResource("Gradient_vpggq")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6eo5e"]
+bounce = 0.2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1kum"]
+size = Vector2(200000, 100)
+
+[sub_resource type="Gradient" id="Gradient_1edn8"]
+colors = PackedColorArray(0, 0.25098, 0, 1, 0, 0.501961, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vsjsl"]
+gradient = SubResource("Gradient_1edn8")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpggq"]
+size = Vector2(10, 300)
+
+[node name="Stage" type="Node2D" node_paths=PackedStringArray("stage_ui", "rolling_shape")]
+script = ExtResource("1_rnkuw")
+stage_ui = NodePath("StageUI")
+rolling_shape = NodePath("RollingShape")
+
+[node name="BackGronud" type="TextureRect" parent="."]
+offset_right = 200000.0
+offset_bottom = 250.0
+texture = SubResource("GradientTexture2D_gx6sy")
+
+[node name="Mask" type="TextureRect" parent="BackGronud"]
+layout_mode = 0
+offset_right = 200000.0
+offset_bottom = 250.0
+texture = SubResource("GradientTexture2D_1edn8")
+
+[node name="Field" type="StaticBody2D" parent="."]
+position = Vector2(0, 300)
+physics_material_override = SubResource("PhysicsMaterial_6eo5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field"]
+position = Vector2(100000, 0)
+shape = SubResource("RectangleShape2D_x1kum")
+
+[node name="ColorRect" type="TextureRect" parent="Field/CollisionShape2D"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100000.0
+offset_top = -50.0
+offset_right = 100000.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_vsjsl")
+
+[node name="Wall" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+position = Vector2(-58, 150)
+shape = SubResource("RectangleShape2D_vpggq")
+
+[node name="DistanceRuler" type="Node2D" parent="."]
+position = Vector2(0, 300)
+script = ExtResource("5_16g40")
+
+[node name="RollingShape" parent="." instance=ExtResource("1_6eo5e")]
+position = Vector2(0, 200)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position = Vector2(0, 200)
+script = ExtResource("3_16g40")
+target = NodePath("../RollingShape")
+
+[node name="StageUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("distance_label", "best_distance_label")]
+script = ExtResource("3_gx6sy")
+distance_label = NodePath("DistanceLabel")
+best_distance_label = NodePath("BestDistanceLabel")
+
+[node name="DistanceLabel" type="RichTextLabel" parent="StageUI"]
+offset_top = 76.0
+offset_right = 504.0
+offset_bottom = 152.0
+theme = ExtResource("6_vpggq")
+text = "到達距離:   0 m"
+vertical_alignment = 1
+
+[node name="BestDistanceLabel" type="RichTextLabel" parent="StageUI"]
+offset_right = 565.0
+offset_bottom = 76.0
+theme = ExtResource("6_vpggq")
+text = "最高記録:   0 m"
+vertical_alignment = 1
+
+[connection signal="best_distance_changed" from="." to="StageUI" method="_on_stage_best_distance_changed"]
+[connection signal="distance_updated" from="RollingShape" to="StageUI" method="_on_rolling_shape_distance_updated"]
+[connection signal="run_finished" from="RollingShape" to="." method="_on_rolling_shape_run_finished"]
+[connection signal="run_finished" from="RollingShape" to="StageUI" method="_on_rolling_shape_run_finished"]

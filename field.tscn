@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://hxmilwvyamqt"]
+
+[ext_resource type="PackedScene" uid="uid://dew72b5qrawv0" path="res://stage.tscn" id="1_0cutk"]
+[ext_resource type="Script" uid="uid://bvxtbrnimej3i" path="res://field_ui.gd" id="2_6e7u2"]
+[ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="3_srqns"]
+[ext_resource type="PackedScene" uid="uid://2i73arvgbv3e" path="res://rolling_shape.tscn" id="3_ujqnb"]
+[ext_resource type="PackedScene" uid="uid://bsxi8ed7sfnof" path="res://parameter_panel.tscn" id="4_gj8yl"]
+[ext_resource type="Script" uid="uid://b1r7cmqhklbjm" path="res://component/accept_dialog.gd" id="4_vm625"]
+[ext_resource type="Resource" uid="uid://bmppc8kdkl7l7" path="res://parameter/convergence.tres" id="5_qvwwi"]
+[ext_resource type="Resource" uid="uid://oudqr82sk32h" path="res://parameter/rocket_start.tres" id="6_wg54h"]
+[ext_resource type="Resource" uid="uid://daxrcmh0jknwl" path="res://parameter/ice_ball.tres" id="7_sqdb0"]
+[ext_resource type="Resource" uid="uid://c2ytvxxqwqnpg" path="res://parameter/tornado.tres" id="8_wg54h"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="UI" type="Control" parent="." node_paths=PackedStringArray("ui_rolling_shape", "stage_rolling_shape", "stage", "accept_dialog", "gold_label", "convergence_panel", "rocket_start_panel", "tornado_panel", "ice_ball_panel", "gold_rush_panel", "color_rect")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_6e7u2")
+ui_rolling_shape = NodePath("RollingShape")
+stage_rolling_shape = NodePath("../SubViewportContainer/SubViewport/Stage/RollingShape")
+stage = NodePath("../SubViewportContainer/SubViewport/Stage")
+accept_dialog = NodePath("AcceptDialog")
+gold_label = NodePath("GoldLabel")
+convergence_panel = NodePath("ConvergencePanel")
+rocket_start_panel = NodePath("ParameterContainerLeft/RocketStartPanel")
+tornado_panel = NodePath("ParameterContainerLeft/TornadoPanel")
+ice_ball_panel = NodePath("ParameterContainerRight/IceBallPanel")
+gold_rush_panel = NodePath("ParameterContainerRight/GoldRushPanel")
+color_rect = NodePath("../ColorRect")
+
+[node name="RollingShape" parent="UI" instance=ExtResource("3_ujqnb")]
+position = Vector2(960, 390)
+scale = Vector2(7, 7)
+freeze = true
+
+[node name="GoldLabel" type="RichTextLabel" parent="UI"]
+layout_mode = 0
+offset_right = 171.0
+offset_bottom = 81.0
+theme = ExtResource("3_srqns")
+bbcode_enabled = true
+text = "[color=gold]  0 G[/color]"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AcceptDialog" type="AcceptDialog" parent="UI" node_paths=PackedStringArray("label")]
+title = "結果発表"
+position = Vector2i(0, 60)
+size = Vector2i(238, 189)
+exclusive = false
+theme = ExtResource("3_srqns")
+script = ExtResource("4_vm625")
+label = NodePath("RichTextLabel")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="UI/AcceptDialog"]
+offset_left = 15.0
+offset_top = 5.0
+offset_right = 223.0
+offset_bottom = 78.0
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ConvergencePanel" parent="UI" instance=ExtResource("4_gj8yl")]
+layout_mode = 2
+offset_left = 710.0
+offset_top = 240.0
+offset_right = 1210.0
+offset_bottom = 540.0
+parameter = ExtResource("5_qvwwi")
+
+[node name="ParameterContainerLeft" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 550.0
+offset_bottom = 730.0
+theme_override_constants/separation = 30
+
+[node name="RocketStartPanel" parent="UI/ParameterContainerLeft" instance=ExtResource("4_gj8yl")]
+layout_mode = 2
+parameter = ExtResource("6_wg54h")
+
+[node name="TornadoPanel" parent="UI/ParameterContainerLeft" instance=ExtResource("4_gj8yl")]
+layout_mode = 2
+parameter = ExtResource("8_wg54h")
+
+[node name="ParameterContainerRight" type="VBoxContainer" parent="UI"]
+layout_mode = 0
+offset_left = 1370.0
+offset_top = 100.0
+offset_right = 1870.0
+offset_bottom = 730.0
+theme_override_constants/separation = 30
+
+[node name="IceBallPanel" parent="UI/ParameterContainerRight" instance=ExtResource("4_gj8yl")]
+layout_mode = 2
+parameter = ExtResource("7_sqdb0")
+
+[node name="GoldRushPanel" parent="UI/ParameterContainerRight" instance=ExtResource("4_gj8yl")]
+layout_mode = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_top = 780.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1920, 300)
+render_target_update_mode = 4
+
+[node name="Stage" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_0cutk")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="level_upped" from="UI/ConvergencePanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ParameterContainerLeft/RocketStartPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ParameterContainerLeft/TornadoPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ParameterContainerRight/IceBallPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ParameterContainerRight/GoldRushPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="run_finished" from="SubViewportContainer/SubViewport/Stage/RollingShape" to="UI" method="_on_rolling_shape_run_finished"]
+
+[editable path="UI/RollingShape"]
+[editable path="SubViewportContainer/SubViewport/Stage"]
