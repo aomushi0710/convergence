@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dew72b5qrawv0"]
+[gd_scene format=3 uid="uid://dew72b5qrawv0"]
 
 [ext_resource type="PackedScene" uid="uid://2i73arvgbv3e" path="res://rolling_shape.tscn" id="1_6eo5e"]
 [ext_resource type="Script" uid="uid://c0mcr44uv382o" path="res://component/stage.gd" id="1_rnkuw"]
@@ -39,31 +39,31 @@ fill_to = Vector2(0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vpggq"]
 size = Vector2(10, 300)
 
-[node name="Stage" type="Node2D" node_paths=PackedStringArray("stage_ui", "rolling_shape")]
+[node name="Stage" type="Node2D" unique_id=2096384665 node_paths=PackedStringArray("stage_ui", "rolling_shape")]
 script = ExtResource("1_rnkuw")
 stage_ui = NodePath("StageUI")
 rolling_shape = NodePath("RollingShape")
 
-[node name="BackGronud" type="TextureRect" parent="."]
+[node name="BackGronud" type="TextureRect" parent="." unique_id=489210088]
 offset_right = 200000.0
 offset_bottom = 250.0
 texture = SubResource("GradientTexture2D_gx6sy")
 
-[node name="Mask" type="TextureRect" parent="BackGronud"]
+[node name="Mask" type="TextureRect" parent="BackGronud" unique_id=1718484617]
 layout_mode = 0
 offset_right = 200000.0
 offset_bottom = 250.0
 texture = SubResource("GradientTexture2D_1edn8")
 
-[node name="Field" type="StaticBody2D" parent="."]
+[node name="Field" type="StaticBody2D" parent="." unique_id=1568675839]
 position = Vector2(0, 300)
 physics_material_override = SubResource("PhysicsMaterial_6eo5e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Field"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Field" unique_id=30785763]
 position = Vector2(100000, 0)
 shape = SubResource("RectangleShape2D_x1kum")
 
-[node name="ColorRect" type="TextureRect" parent="Field/CollisionShape2D"]
+[node name="ColorRect" type="TextureRect" parent="Field/CollisionShape2D" unique_id=514145164]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -77,30 +77,30 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_vsjsl")
 
-[node name="Wall" type="StaticBody2D" parent="."]
+[node name="Wall" type="StaticBody2D" parent="." unique_id=953157545]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=1202209734]
 position = Vector2(-58, 150)
 shape = SubResource("RectangleShape2D_vpggq")
 
-[node name="DistanceRuler" type="Node2D" parent="."]
+[node name="DistanceRuler" type="Node2D" parent="." unique_id=946781530]
 position = Vector2(0, 300)
 script = ExtResource("5_16g40")
 
-[node name="RollingShape" parent="." instance=ExtResource("1_6eo5e")]
+[node name="RollingShape" parent="." unique_id=1316873196 instance=ExtResource("1_6eo5e")]
 position = Vector2(0, 200)
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=591548726 node_paths=PackedStringArray("target")]
 position = Vector2(0, 200)
 script = ExtResource("3_16g40")
 target = NodePath("../RollingShape")
 
-[node name="StageUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("distance_label", "best_distance_label")]
+[node name="StageUI" type="CanvasLayer" parent="." unique_id=2127360230 node_paths=PackedStringArray("distance_label", "best_distance_label")]
 script = ExtResource("3_gx6sy")
 distance_label = NodePath("DistanceLabel")
 best_distance_label = NodePath("BestDistanceLabel")
 
-[node name="DistanceLabel" type="RichTextLabel" parent="StageUI"]
+[node name="DistanceLabel" type="RichTextLabel" parent="StageUI" unique_id=1718413080]
 offset_top = 76.0
 offset_right = 504.0
 offset_bottom = 152.0
@@ -108,7 +108,7 @@ theme = ExtResource("6_vpggq")
 text = "到達距離:   0 m"
 vertical_alignment = 1
 
-[node name="BestDistanceLabel" type="RichTextLabel" parent="StageUI"]
+[node name="BestDistanceLabel" type="RichTextLabel" parent="StageUI" unique_id=490757745]
 offset_right = 565.0
 offset_bottom = 76.0
 theme = ExtResource("6_vpggq")

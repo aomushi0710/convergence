@@ -14,8 +14,10 @@ var best_distance: int: ## 最高記録
 var shoot_power: int = 1000
 var torque_power: int = 500
 
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+func _unhandled_input(event: InputEvent) -> void:
+	var is_key_pressed = event is InputEventKey and not event.is_echo()
+	var is_tapped = event is InputEventMouseButton or event is InputEventScreenTouch
+	if event.is_pressed() and (is_key_pressed or is_tapped):
 		shoot()
 
 func shoot() -> void:
