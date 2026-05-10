@@ -13,8 +13,14 @@ extends Control
 @export var tornado_panel: ParameterPanel
 @export var ice_ball_panel: ParameterPanel
 @export var gold_rush_panel: ParameterPanel
+@export var time_is_money_panel: ParameterPanel
+@export var time_to_money_panel: ParameterPanel
 
 @export var color_rect: ColorRect
+
+var all_panel: Array[ParameterPanel] ## 全パネルの反復処理用配列
+
+var time_to_gold_rate: int = 0
 
 var gold_multiplier: float = 1.0:
 	set(value):
@@ -32,19 +38,22 @@ var gold: int:
 
 
 func _ready() -> void:
+	color_rect.show()
 	stage.best_distance = SaveManager.game_data["high_score"]
 	gold = SaveManager.game_data["gold"]
 	
-	var all_panel: Array[ParameterPanel] = [
+	all_panel = [
 		convergence_panel,
 		rocket_start_panel,
 		tornado_panel,
 		ice_ball_panel,
 		gold_rush_panel,
+		time_is_money_panel,
+		time_to_money_panel,
 	]
 	
 	for i in all_panel.size():
-		all_panel[i].level = SaveManager.game_data["level"][str(i)]
+		all_panel[i].level = SaveManager.game_data["level"][i]
 		_update(all_panel[i])
 	
 	_gold_update()
@@ -55,53 +64,67 @@ func _ready() -> void:
 
 ## アニメーション再生
 func _process(delta: float) -> void:
-	ui_rolling_shape.rotation += delta * (tornado_panel.level * 0.05)
+	if Engine.time_scale <= 0: # 0除算防止
+		return
+	
+	## [member Engine.time_scale]に基づいて等倍に戻されたdelta値
+	var unscaled_delta := delta / Engine.time_scale
+	ui_rolling_shape.rotation += unscaled_delta * (tornado_panel.level * 0.05)
 	if ui_rolling_shape.rotation >= 360:
 		ui_rolling_shape.rotation = 0
 
 ## 現在のレベルに合わせてパラメータを更新します
 func _update(panel: ParameterPanel) -> void:
+	var value := panel.parameter.get_value(panel.level)
 	match panel.parameter.type:
 		Parameter.Type.CONVERGENCE:
-			ui_rolling_shape.sides = panel.parameter.get_value(panel.level)
-			stage_rolling_shape.sides = panel.parameter.get_value(panel.level)
+			ui_rolling_shape.sides = int(value)
+			stage_rolling_shape.sides = int(value)
 		
 		Parameter.Type.ROCKET_START:
-			stage.shoot_power = panel.parameter.get_value(panel.level)
+			stage.shoot_power = int(value)
 		
 		Parameter.Type.TORNADO:
-			stage.torque_power = panel.parameter.get_value(panel.level)
+			stage.torque_power = int(value)
 		
 		Parameter.Type.ICE_BALL:
-			ui_rolling_shape.friction = panel.parameter.get_value(panel.level)
-			stage_rolling_shape.friction = panel.parameter.get_value(panel.level)
+			ui_rolling_shape.friction = value
+			stage_rolling_shape.friction = value
 		
 		Parameter.Type.GOLD_RUSH:
-			gold_multiplier = panel.parameter.get_value(panel.level)
+			gold_multiplier = value
+		
+		Parameter.Type.TIME_IS_MONEY:
+			stage_rolling_shape.time_scale_multiplier = value
+		
+		Parameter.Type.TIME_TO_MONEY:
+			time_to_gold_rate = int(value)
 
 ## 全ての[ParameterPanel]に対して[method ParameterPanel.gold_update]を呼び出します
 func _gold_update() -> void:
-	var all_panel: Array[ParameterPanel] = [
-		convergence_panel,
-		rocket_start_panel,
-		tornado_panel,
-		ice_ball_panel,
-		gold_rush_panel,
-	]
-	
 	for panel in all_panel:
 		panel.gold_update(gold)
 
 
-func _on_rolling_shape_run_finished(final_distance: float) -> void:
-	var distance_value := int(final_distance / 100.0)
-	var gold_value := int(distance_value * gold_multiplier)
+func _on_rolling_shape_run_finished(distance: float, time: float) -> void:
+	var final_distance := int(distance / 100.0)
+	var gold_value := int(final_distance * gold_multiplier)
+	var final_time := int(time)
+	var time_to_gold := int(final_time * time_to_gold_rate * gold_multiplier)
 	
-	accept_dialog.display_dialog(
-		"[color=red]%d m[/color] に到達しました！\n" % distance_value + 
-		"[color=gold]%d G を手に入れた" % gold_value
+	var result_text := (
+		"[color=red]%d m[/color] に到達しました！\n" % final_distance + 
+		"[color=gold]%d G[/color] を手に入れた" % gold_value
 	)
-	gold += gold_value
+	if time_to_gold_rate > 0:
+		result_text += (
+			"\n\n～ [color=gold]Time to Money[/color] ～" +
+			"\n%d 秒 が経過しました！" % final_time + 
+			"\n[color=gold]%d G[/color] を追加で手に入れた" % time_to_gold
+		)
+	
+	accept_dialog.display_dialog(result_text)
+	gold += gold_value + time_to_gold
 
 
 func _on_parameter_panel_level_upped(panel: ParameterPanel, gold_value: int) -> void:
@@ -110,5 +133,5 @@ func _on_parameter_panel_level_upped(panel: ParameterPanel, gold_value: int) -> 
 	
 	_update(panel)
 	
-	SaveManager.game_data["level"][str(panel.parameter.type)] += 1
+	SaveManager.game_data["level"][panel.parameter.type] += 1
 	SaveManager.save_game()

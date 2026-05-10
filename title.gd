@@ -1,8 +1,14 @@
 extends Node2D
 
 @export var camera_2d: Camera2D
+@export var version_label: RichTextLabel
 
 var is_transitioning: bool
+
+
+func _ready() -> void:
+	version_label.text = "ver.%s" % ProjectSettings.get_setting("application/config/version")
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	var is_key_pressed = event is InputEventKey and not event.is_echo()

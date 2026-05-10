@@ -1,8 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bsxi8ed7sfnof"]
+[gd_scene format=3 uid="uid://bsxi8ed7sfnof"]
 
 [ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="1_gh725"]
 [ext_resource type="Script" uid="uid://bb1fsihpxlucd" path="res://component/parameter_panel.gd" id="2_hjsf8"]
-[ext_resource type="Resource" uid="uid://cn02mutdm78po" path="res://parameter/gold_rush.tres" id="3_hjsf8"]
+[ext_resource type="Resource" uid="uid://bo4kduwe3tje7" path="res://parameter/time_to_money.tres" id="3_hjsf8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etyvt"]
 bg_color = Color(0, 0, 0, 1)
@@ -28,13 +28,12 @@ default_font_size = 40
 [sub_resource type="Theme" id="Theme_n3tya"]
 default_font_size = 40
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gh725"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7ocp"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color(0.4, 0.4, 0.4, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjsf8"]
 bg_color = Color(0, 0, 0, 1)
@@ -44,17 +43,18 @@ border_width_right = 5
 border_width_bottom = 5
 border_color = Color(0.6, 0.6, 0.6, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7ocp"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gh725"]
 bg_color = Color(0, 0, 0, 1)
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
+border_color = Color(0.4, 0.4, 0.4, 1)
 
 [sub_resource type="Theme" id="Theme_fapsg"]
 default_font_size = 40
 
-[node name="ParameterPanel" type="Panel" node_paths=PackedStringArray("parameter_label", "description_label", "level_label", "value_label", "gold_label", "button")]
+[node name="ParameterPanel" type="Panel" unique_id=1917615371 node_paths=PackedStringArray("parameter_label", "description_label", "level_label", "value_label", "gold_label", "button")]
 custom_minimum_size = Vector2(500, 300)
 offset_right = 500.0
 offset_bottom = 300.0
@@ -68,33 +68,34 @@ value_label = NodePath("ValueLabel")
 gold_label = NodePath("Button/GoldLabel")
 button = NodePath("Button")
 parameter = ExtResource("3_hjsf8")
+level = 49
 
-[node name="ParameterLabel" type="RichTextLabel" parent="."]
+[node name="ParameterLabel" type="RichTextLabel" parent="." unique_id=1640299474]
 layout_mode = 0
 offset_right = 500.0
 offset_bottom = 73.0
 bbcode_enabled = true
-text = "[color=gold][b]ゴールドラッシュ[/b][/color]"
+text = "[color=gold][b]Time to Money[/b][/color]"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="."]
+[node name="DescriptionLabel" type="RichTextLabel" parent="." unique_id=1446491352]
 layout_mode = 0
 offset_top = 60.0
 offset_right = 496.0
 offset_bottom = 200.0
 theme = SubResource("Theme_a7ocp")
 bbcode_enabled = true
-text = "[i]入手できる[color=gold]ゴールド[/color]数が
-増加する (MAX 46)[/i]"
+text = "[i]計測時間に応じて[color=gold]ゴールド[/color]
+を入手する (MAX 50)[/i]"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelLabel" type="RichTextLabel" parent="."]
+[node name="LevelLabel" type="RichTextLabel" parent="." unique_id=936819460]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 200.0
@@ -102,13 +103,13 @@ offset_right = 283.0
 offset_bottom = 248.0
 theme = SubResource("Theme_gh725")
 bbcode_enabled = true
-text = "Lv.   1    Lv.   2"
+text = "Lv.  49    Lv.  50"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ValueLabel" type="RichTextLabel" parent="."]
+[node name="ValueLabel" type="RichTextLabel" parent="." unique_id=1665159204]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 230.0
@@ -116,31 +117,31 @@ offset_right = 283.0
 offset_bottom = 303.0
 theme = SubResource("Theme_hjsf8")
 bbcode_enabled = true
-text = " 1.0 → [color=gray] 1.2[/color]"
+text = "  49 → [color=gray]  50[/color]"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="."]
+[node name="Button" type="Button" parent="." unique_id=219905633]
 layout_mode = 0
 offset_left = 291.0
 offset_top = 218.0
 offset_right = 483.0
 offset_bottom = 285.0
 theme = SubResource("Theme_n3tya")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_gh725")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_hjsf8")
 theme_override_styles/normal = SubResource("StyleBoxFlat_a7ocp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hjsf8")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_gh725")
 
-[node name="GoldLabel" type="RichTextLabel" parent="Button"]
+[node name="GoldLabel" type="RichTextLabel" parent="Button" unique_id=254646403]
 layout_mode = 0
 offset_right = 192.0
 offset_bottom = 67.0
 mouse_filter = 1
 theme = SubResource("Theme_fapsg")
 bbcode_enabled = true
-text = "[color=gold] 130 G[/color]"
+text = "[color=gold]125000 G[/color]"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1

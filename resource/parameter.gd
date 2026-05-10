@@ -8,6 +8,8 @@ enum Type { ## パラメータの種類
 	TORNADO,
 	ICE_BALL,
 	GOLD_RUSH,
+	TIME_IS_MONEY,
+	TIME_TO_MONEY,
 }
 
 enum CalcType { ## コスト計算式の種類

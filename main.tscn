@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://dtvrgbdtvo4pv" path="res://asset/title.png" id="1_ig7tw"]
 [ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="3_h2yge"]
 
-[node name="Title" type="Node2D" unique_id=2081301446 node_paths=PackedStringArray("camera_2d")]
+[node name="Title" type="Node2D" unique_id=2081301446 node_paths=PackedStringArray("camera_2d", "version_label")]
 script = ExtResource("1_0xm2m")
 camera_2d = NodePath("Camera2D")
+version_label = NodePath("VersionLabel")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=449175773]
 offset_left = -300.0
@@ -17,7 +18,7 @@ texture = ExtResource("1_ig7tw")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=544393198]
 position = Vector2(960, 540)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=625061833]
+[node name="CopyRightLabel" type="RichTextLabel" parent="." unique_id=625061833]
 offset_left = 710.0
 offset_top = 1007.0
 offset_right = 1210.0
@@ -27,3 +28,16 @@ bbcode_enabled = true
 text = "(C) 2026 aomushi0710"
 fit_content = true
 autowrap_mode = 0
+
+[node name="VersionLabel" type="RichTextLabel" parent="." unique_id=1221585941]
+offset_left = 1675.0
+offset_top = 987.0
+offset_right = 1900.0
+offset_bottom = 1060.0
+theme = ExtResource("3_h2yge")
+bbcode_enabled = true
+text = "ver.0.0.0"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1

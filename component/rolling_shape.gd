@@ -2,8 +2,9 @@
 extends RigidBody2D
 class_name RollingShape
 
-signal distance_updated(distance: float)
-signal run_finished(final_distance: float)
+signal fast_forward_started
+signal run_updated(distance: float, time: float)
+signal run_finished(distance: float, time: float)
 
 @export var line_2d: Line2D
 @export var polygon_2d: Polygon2D
@@ -22,14 +23,17 @@ signal run_finished(final_distance: float)
 			physics_material_override.friction = value
 			line_2d.self_modulate.r = value
 
-var radius: int = 50 ## 半径
+static var radius: int = 50 ## 半径
+
+var time_scale_multiplier: float = 1.0 ## 早送り倍率
 
 var is_stopped: bool = true
 var active_time: float = 0.0 ## 発射されてからの経過秒数  
+var is_fast_forwarding: bool = false
 
 ## 生成された[PackedVector2Array]をポリゴンに適用します
 func update_shape() -> void:
-	var points: PackedVector2Array = generate_polygon(sides, radius)
+	var points: PackedVector2Array = generate_polygon()
 	polygon_2d.polygon = points
 	collision_polygon_2d.polygon = points
 	line_2d.points = points
@@ -40,7 +44,7 @@ func update_shape() -> void:
 	angular_damp = drag
 
 ## 正多角形の頂点を計算します
-func generate_polygon(sides: int, r: int) -> PackedVector2Array:
+func generate_polygon() -> PackedVector2Array:
 	var points := PackedVector2Array()
 	## 奇数の多角形でも、下の辺を水平にするためのオフセット[br]PI/2(90°)で下を向かせる
 	var base_offset: float = (PI / 2.0) - (PI / sides)
@@ -49,7 +53,7 @@ func generate_polygon(sides: int, r: int) -> PackedVector2Array:
 		## 2PIを頂点の数で割ってを算出し、オフセットを足した各頂点の角度
 		var angle: float = (PI * 2.0 / sides) * i + base_offset
 		
-		var point := Vector2(cos(angle), sin(angle)) * r
+		var point := Vector2(cos(angle), sin(angle)) * radius
 		points.append(point)
 		
 	return points
@@ -57,14 +61,20 @@ func generate_polygon(sides: int, r: int) -> PackedVector2Array:
 
 func _physics_process(delta: float) -> void:
 	if not is_stopped:
-		distance_updated.emit(global_position.x)
+		run_updated.emit(global_position.x, active_time)
 		active_time += delta
+		
+		# 早送り判定
+		if active_time > 10.0 and not is_fast_forwarding:
+			Engine.time_scale = time_scale_multiplier
+			Engine.physics_ticks_per_second = int(60.0 * Engine.time_scale)
+			fast_forward_started.emit()
+			is_fast_forwarding = true
 		
 		# 停止判定
 		if active_time > 0.5 and linear_velocity.length() < 2.0 and abs(angular_velocity) < 0.1:
-			is_stopped = true
-			run_finished.emit(global_position.x)
-			active_time = 0
+			run_finished.emit(global_position.x, active_time)
+			active_time = 0 # シグナルを発行してから初期化
 
 ## 自身を発射します
 func launch(impulse: Vector2, torque: float) -> void:
@@ -77,7 +87,12 @@ func launch(impulse: Vector2, torque: float) -> void:
 	apply_torque_impulse(torque)
 
 ## 発射前の初期状態に戻します
-func _on_run_finished(final_distance: float) -> void:
+func _on_run_finished(_distance: float, _time: float) -> void:
+	is_stopped = true
+	is_fast_forwarding = false
+	Engine.time_scale = 1.0
+	Engine.physics_ticks_per_second = int(60.0 * Engine.time_scale)
+	
 	global_rotation = 0
 	linear_velocity = Vector2.ZERO
 	angular_velocity = 0

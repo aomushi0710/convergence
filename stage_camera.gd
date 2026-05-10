@@ -2,6 +2,6 @@ extends Camera2D
 
 @export var target: RollingShape
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if target:
-		global_position.x = maxi(1920 / 2, target.global_position.x)
+		global_position.x = maxf(960, target.global_position.x)

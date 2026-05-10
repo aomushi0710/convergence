@@ -24,7 +24,10 @@ signal level_upped(panel: ParameterPanel, gold_value: int)
 		level = value
 		_level_update()
 
-var upgrade_cost: int
+var upgrade_cost: int:
+	set(value):
+		upgrade_cost = value
+		gold_update(value)
 
 
 func _ready() -> void:
@@ -75,10 +78,10 @@ func gold_update(gold: int) -> void:
 		gold_label.text = "[color=red]MAX[/color]"
 	elif upgrade_cost > gold:
 		button.disabled = true
-		gold_label.text = "[color=gray]%4d G[/color]" % upgrade_cost
+		gold_label.text = "[color=gray]%d G[/color]" % upgrade_cost
 	else:
 		button.disabled = false
-		gold_label.text = "[color=gold]%4d G[/color]" % upgrade_cost
+		gold_label.text = "[color=gold]%d G[/color]" % upgrade_cost
 
 
 func _on_button_button_up() -> void:

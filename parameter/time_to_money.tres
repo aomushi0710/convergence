@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Parameter" format=3 uid="uid://bo4kduwe3tje7"]
+
+[ext_resource type="Script" uid="uid://bslyyv4a5jomd" path="res://resource/parameter.gd" id="1_ooh57"]
+
+[resource]
+script = ExtResource("1_ooh57")
+type = 6
+name = "Time to Money"
+color_name = "gold"
+description = "計測時間に応じて[color=gold]ゴールド[/color]
+を入手する (MAX 50)"
+base_cost = 50
+factor = 2.0
+calc_type = 1
+base_value = 1.0
+growth_value = 1.0
+max_level = 50
+metadata/_custom_type_script = "uid://bslyyv4a5jomd"

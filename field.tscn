@@ -10,10 +10,12 @@
 [ext_resource type="Resource" uid="uid://oudqr82sk32h" path="res://parameter/rocket_start.tres" id="6_wg54h"]
 [ext_resource type="Resource" uid="uid://daxrcmh0jknwl" path="res://parameter/ice_ball.tres" id="7_sqdb0"]
 [ext_resource type="Resource" uid="uid://c2ytvxxqwqnpg" path="res://parameter/tornado.tres" id="8_wg54h"]
+[ext_resource type="Resource" uid="uid://cn02mutdm78po" path="res://parameter/gold_rush.tres" id="10_sqdb0"]
+[ext_resource type="Resource" uid="uid://bd3oa57xxkt66" path="res://parameter/time_is_money.tres" id="11_b2s6v"]
 
 [node name="Node2D" type="Node2D" unique_id=2002661213]
 
-[node name="UI" type="Control" parent="." unique_id=583004390 node_paths=PackedStringArray("ui_rolling_shape", "stage_rolling_shape", "stage", "accept_dialog", "gold_label", "convergence_panel", "rocket_start_panel", "tornado_panel", "ice_ball_panel", "gold_rush_panel", "color_rect")]
+[node name="UI" type="Control" parent="." unique_id=583004390 node_paths=PackedStringArray("ui_rolling_shape", "stage_rolling_shape", "stage", "accept_dialog", "gold_label", "convergence_panel", "rocket_start_panel", "tornado_panel", "ice_ball_panel", "gold_rush_panel", "time_is_money_panel", "time_to_money_panel", "color_rect")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -25,10 +27,12 @@ stage = NodePath("../SubViewportContainer/SubViewport/Stage")
 accept_dialog = NodePath("AcceptDialog")
 gold_label = NodePath("GoldLabel")
 convergence_panel = NodePath("ConvergencePanel")
-rocket_start_panel = NodePath("ParameterContainerLeft/RocketStartPanel")
-tornado_panel = NodePath("ParameterContainerLeft/TornadoPanel")
-ice_ball_panel = NodePath("ParameterContainerRight/IceBallPanel")
-gold_rush_panel = NodePath("ParameterContainerRight/GoldRushPanel")
+rocket_start_panel = NodePath("ParameterContainerLeft2/VBoxContainer/RocketStartPanel")
+tornado_panel = NodePath("ParameterContainerLeft2/VBoxContainer/TornadoPanel")
+ice_ball_panel = NodePath("ParameterContainerLeft2/VBoxContainer/IceBallPanel")
+gold_rush_panel = NodePath("ScrollContainer/ParameterContainerRight/GoldRushPanel")
+time_is_money_panel = NodePath("ScrollContainer/ParameterContainerRight/TimeIsMoneyPanel")
+time_to_money_panel = NodePath("ScrollContainer/ParameterContainerRight/TimeToMoneyPanel")
 color_rect = NodePath("../ColorRect")
 
 [node name="RollingShape" parent="UI" unique_id=842444663 instance=ExtResource("3_ujqnb")]
@@ -76,36 +80,52 @@ offset_right = 1210.0
 offset_bottom = 540.0
 parameter = ExtResource("5_qvwwi")
 
-[node name="ParameterContainerLeft" type="VBoxContainer" parent="UI" unique_id=820296044]
+[node name="ParameterContainerLeft2" type="ScrollContainer" parent="UI" unique_id=462975326]
 layout_mode = 0
 offset_left = 50.0
 offset_top = 100.0
 offset_right = 550.0
-offset_bottom = 730.0
-theme_override_constants/separation = 30
+offset_bottom = 780.0
 
-[node name="RocketStartPanel" parent="UI/ParameterContainerLeft" unique_id=383823316 instance=ExtResource("4_gj8yl")]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/ParameterContainerLeft2" unique_id=820296044]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="RocketStartPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=383823316 instance=ExtResource("4_gj8yl")]
 layout_mode = 2
 parameter = ExtResource("6_wg54h")
 
-[node name="TornadoPanel" parent="UI/ParameterContainerLeft" unique_id=1605377447 instance=ExtResource("4_gj8yl")]
+[node name="TornadoPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=1605377447 instance=ExtResource("4_gj8yl")]
 layout_mode = 2
 parameter = ExtResource("8_wg54h")
 
-[node name="ParameterContainerRight" type="VBoxContainer" parent="UI" unique_id=2105946647]
+[node name="IceBallPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=23052154 instance=ExtResource("4_gj8yl")]
+layout_mode = 2
+parameter = ExtResource("7_sqdb0")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UI" unique_id=1641757638]
 layout_mode = 0
 offset_left = 1370.0
 offset_top = 100.0
 offset_right = 1870.0
-offset_bottom = 730.0
-theme_override_constants/separation = 30
+offset_bottom = 780.0
 
-[node name="IceBallPanel" parent="UI/ParameterContainerRight" unique_id=23052154 instance=ExtResource("4_gj8yl")]
+[node name="ParameterContainerRight" type="VBoxContainer" parent="UI/ScrollContainer" unique_id=2105946647]
 layout_mode = 2
-parameter = ExtResource("7_sqdb0")
+theme_override_constants/separation = 20
 
-[node name="GoldRushPanel" parent="UI/ParameterContainerRight" unique_id=2114766098 instance=ExtResource("4_gj8yl")]
+[node name="GoldRushPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=2114766098 instance=ExtResource("4_gj8yl")]
 layout_mode = 2
+parameter = ExtResource("10_sqdb0")
+
+[node name="TimeIsMoneyPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=1917615371 instance=ExtResource("4_gj8yl")]
+layout_mode = 2
+parameter = ExtResource("11_b2s6v")
+level = 0
+
+[node name="TimeToMoneyPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=651122796 instance=ExtResource("4_gj8yl")]
+layout_mode = 2
+level = 0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=929542727]
 offset_top = 780.0
@@ -119,16 +139,23 @@ render_target_update_mode = 4
 
 [node name="Stage" parent="SubViewportContainer/SubViewport" unique_id=977811256 instance=ExtResource("1_0cutk")]
 
+[node name="FastForwardLabel" parent="SubViewportContainer/SubViewport/Stage/StageUI" parent_id_path=PackedInt32Array(977811256, 2127360230) index="3" unique_id=1800605560]
+offset_left = 1659.0
+text = "▶▶ x1.1"
+
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1733220788]
+visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 
 [connection signal="level_upped" from="UI/ConvergencePanel" to="UI" method="_on_parameter_panel_level_upped"]
-[connection signal="level_upped" from="UI/ParameterContainerLeft/RocketStartPanel" to="UI" method="_on_parameter_panel_level_upped"]
-[connection signal="level_upped" from="UI/ParameterContainerLeft/TornadoPanel" to="UI" method="_on_parameter_panel_level_upped"]
-[connection signal="level_upped" from="UI/ParameterContainerRight/IceBallPanel" to="UI" method="_on_parameter_panel_level_upped"]
-[connection signal="level_upped" from="UI/ParameterContainerRight/GoldRushPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ParameterContainerLeft2/VBoxContainer/RocketStartPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ParameterContainerLeft2/VBoxContainer/TornadoPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ParameterContainerLeft2/VBoxContainer/IceBallPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ScrollContainer/ParameterContainerRight/GoldRushPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ScrollContainer/ParameterContainerRight/TimeIsMoneyPanel" to="UI" method="_on_parameter_panel_level_upped"]
+[connection signal="level_upped" from="UI/ScrollContainer/ParameterContainerRight/TimeToMoneyPanel" to="UI" method="_on_parameter_panel_level_upped"]
 [connection signal="run_finished" from="SubViewportContainer/SubViewport/Stage/RollingShape" to="UI" method="_on_rolling_shape_run_finished"]
 
 [editable path="UI/RollingShape"]

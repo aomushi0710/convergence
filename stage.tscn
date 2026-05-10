@@ -95,10 +95,12 @@ position = Vector2(0, 200)
 script = ExtResource("3_16g40")
 target = NodePath("../RollingShape")
 
-[node name="StageUI" type="CanvasLayer" parent="." unique_id=2127360230 node_paths=PackedStringArray("distance_label", "best_distance_label")]
+[node name="StageUI" type="CanvasLayer" parent="." unique_id=2127360230 node_paths=PackedStringArray("distance_label", "best_distance_label", "timer_label", "fast_forward_label")]
 script = ExtResource("3_gx6sy")
 distance_label = NodePath("DistanceLabel")
 best_distance_label = NodePath("BestDistanceLabel")
+timer_label = NodePath("TimerLabel")
+fast_forward_label = NodePath("FastForwardLabel")
 
 [node name="DistanceLabel" type="RichTextLabel" parent="StageUI" unique_id=1718413080]
 offset_top = 76.0
@@ -115,7 +117,33 @@ theme = ExtResource("6_vpggq")
 text = "最高記録:   0 m"
 vertical_alignment = 1
 
+[node name="TimerLabel" type="RichTextLabel" parent="StageUI" unique_id=28025531]
+clip_contents = false
+offset_left = 1745.0
+offset_right = 1870.0
+offset_bottom = 73.0
+theme = ExtResource("6_vpggq")
+bbcode_enabled = true
+text = "00.00"
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FastForwardLabel" type="RichTextLabel" parent="StageUI" unique_id=1800605560]
+visible = false
+offset_left = 1684.0
+offset_top = 60.0
+offset_right = 1870.0
+offset_bottom = 133.0
+theme = ExtResource("6_vpggq")
+bbcode_enabled = true
+text = "▶▶ x2 "
+fit_content = true
+autowrap_mode = 0
+
 [connection signal="best_distance_changed" from="." to="StageUI" method="_on_stage_best_distance_changed"]
-[connection signal="distance_updated" from="RollingShape" to="StageUI" method="_on_rolling_shape_distance_updated"]
+[connection signal="fast_forward_started" from="RollingShape" to="StageUI" method="_on_rolling_shape_fast_forward_started"]
 [connection signal="run_finished" from="RollingShape" to="." method="_on_rolling_shape_run_finished"]
 [connection signal="run_finished" from="RollingShape" to="StageUI" method="_on_rolling_shape_run_finished"]
+[connection signal="run_updated" from="RollingShape" to="StageUI" method="_on_rolling_shape_run_updated"]

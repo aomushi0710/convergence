@@ -8,8 +8,10 @@ signal best_distance_changed(distance: int)
 
 var best_distance: int: ## 最高記録
 	set(value):
-		best_distance = maxi(best_distance, value)
-		best_distance_changed.emit(value)
+		if value > best_distance:
+			best_distance = value
+			best_distance_changed.emit(value)
+			SaveManager.game_data["high_score"] = value
 
 var shoot_power: int = 1000
 var torque_power: int = 500
@@ -30,8 +32,8 @@ func reset() -> void:
 	rolling_shape.global_rotation = 0
 	rolling_shape.global_position.x = 0
 
-func _on_rolling_shape_run_finished(final_distance: float) -> void:
-	final_distance = int(final_distance / 100.0)
+func _on_rolling_shape_run_finished(distance: float, _time: float) -> void:
+	var final_distance := int(distance / 100.0)
 	if final_distance > best_distance:
 		best_distance = final_distance
 		SaveManager.game_data["best_score"] = best_distance
