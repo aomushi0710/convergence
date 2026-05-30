@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://nbnyay4n2xc0"]
 
-[ext_resource type="Script" uid="uid://cxbywr1dj8v5r" path="res://title.gd" id="1_0xm2m"]
-[ext_resource type="Texture2D" uid="uid://dtvrgbdtvo4pv" path="res://asset/title.png" id="1_ig7tw"]
-[ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://cxbywr1dj8v5r" path="res://script/title.gd" id="1_wp4xf"]
+[ext_resource type="Texture2D" uid="uid://dtvrgbdtvo4pv" path="res://asset/title.png" id="2_brvut"]
+[ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="3_0ha60"]
 
 [node name="Title" type="Node2D" unique_id=2081301446 node_paths=PackedStringArray("camera_2d", "version_label")]
-script = ExtResource("1_0xm2m")
+script = ExtResource("1_wp4xf")
 camera_2d = NodePath("Camera2D")
 version_label = NodePath("VersionLabel")
 
@@ -13,7 +13,7 @@ version_label = NodePath("VersionLabel")
 offset_left = -300.0
 offset_right = 2220.0
 offset_bottom = 1080.0
-texture = ExtResource("1_ig7tw")
+texture = ExtResource("2_brvut")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=544393198]
 position = Vector2(960, 540)
@@ -23,7 +23,7 @@ offset_left = 710.0
 offset_top = 1007.0
 offset_right = 1210.0
 offset_bottom = 1080.0
-theme = ExtResource("3_h2yge")
+theme = ExtResource("3_0ha60")
 bbcode_enabled = true
 text = "(C) 2026 aomushi0710"
 fit_content = true
@@ -34,7 +34,7 @@ offset_left = 1675.0
 offset_top = 987.0
 offset_right = 1900.0
 offset_bottom = 1060.0
-theme = ExtResource("3_h2yge")
+theme = ExtResource("3_0ha60")
 bbcode_enabled = true
 text = "ver.0.0.0"
 fit_content = true

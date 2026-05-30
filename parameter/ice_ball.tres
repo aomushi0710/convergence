@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="Parameter" load_steps=2 format=3 uid="uid://daxrcmh0jknwl"]
+[gd_resource type="Resource" script_class="Parameter" format=3 uid="uid://daxrcmh0jknwl"]
 
-[ext_resource type="Script" uid="uid://bslyyv4a5jomd" path="res://resource/parameter.gd" id="1_mmkup"]
+[ext_resource type="Script" uid="uid://bslyyv4a5jomd" path="res://script/resource/parameter.gd" id="1_mmkup"]
 
 [resource]
 script = ExtResource("1_mmkup")

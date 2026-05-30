@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SaveManager="*res://system/save_manager.gd"
+SaveManager="*res://script/system/save_manager.gd"
 
 [display]
 

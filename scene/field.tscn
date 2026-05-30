@@ -1,17 +1,17 @@
 [gd_scene format=3 uid="uid://hxmilwvyamqt"]
 
-[ext_resource type="PackedScene" uid="uid://dew72b5qrawv0" path="res://stage.tscn" id="1_0cutk"]
-[ext_resource type="Script" uid="uid://bvxtbrnimej3i" path="res://field_ui.gd" id="2_6e7u2"]
-[ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="3_srqns"]
-[ext_resource type="PackedScene" uid="uid://2i73arvgbv3e" path="res://rolling_shape.tscn" id="3_ujqnb"]
-[ext_resource type="PackedScene" uid="uid://bsxi8ed7sfnof" path="res://parameter_panel.tscn" id="4_gj8yl"]
-[ext_resource type="Script" uid="uid://b1r7cmqhklbjm" path="res://component/accept_dialog.gd" id="4_vm625"]
-[ext_resource type="Resource" uid="uid://bmppc8kdkl7l7" path="res://parameter/convergence.tres" id="5_qvwwi"]
-[ext_resource type="Resource" uid="uid://oudqr82sk32h" path="res://parameter/rocket_start.tres" id="6_wg54h"]
-[ext_resource type="Resource" uid="uid://daxrcmh0jknwl" path="res://parameter/ice_ball.tres" id="7_sqdb0"]
-[ext_resource type="Resource" uid="uid://c2ytvxxqwqnpg" path="res://parameter/tornado.tres" id="8_wg54h"]
-[ext_resource type="Resource" uid="uid://cn02mutdm78po" path="res://parameter/gold_rush.tres" id="10_sqdb0"]
-[ext_resource type="Resource" uid="uid://bd3oa57xxkt66" path="res://parameter/time_is_money.tres" id="11_b2s6v"]
+[ext_resource type="Script" uid="uid://bvxtbrnimej3i" path="res://script/field_ui.gd" id="1_4m03q"]
+[ext_resource type="PackedScene" uid="uid://2i73arvgbv3e" path="res://scene/rolling_shape.tscn" id="2_muev0"]
+[ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="3_ogp8f"]
+[ext_resource type="Script" uid="uid://b1r7cmqhklbjm" path="res://script/component/accept_dialog.gd" id="4_63rou"]
+[ext_resource type="PackedScene" uid="uid://bsxi8ed7sfnof" path="res://scene/parameter_panel.tscn" id="5_skip5"]
+[ext_resource type="Resource" uid="uid://bmppc8kdkl7l7" path="res://parameter/convergence.tres" id="6_22eus"]
+[ext_resource type="Resource" uid="uid://oudqr82sk32h" path="res://parameter/rocket_start.tres" id="7_7i1jy"]
+[ext_resource type="Resource" uid="uid://c2ytvxxqwqnpg" path="res://parameter/tornado.tres" id="8_lugw0"]
+[ext_resource type="Resource" uid="uid://daxrcmh0jknwl" path="res://parameter/ice_ball.tres" id="9_v28bg"]
+[ext_resource type="Resource" uid="uid://cn02mutdm78po" path="res://parameter/gold_rush.tres" id="10_3va64"]
+[ext_resource type="Resource" uid="uid://bd3oa57xxkt66" path="res://parameter/time_is_money.tres" id="11_c55v2"]
+[ext_resource type="PackedScene" uid="uid://dew72b5qrawv0" path="res://scene/stage.tscn" id="12_modby"]
 
 [node name="Node2D" type="Node2D" unique_id=2002661213]
 
@@ -20,7 +20,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("2_6e7u2")
+script = ExtResource("1_4m03q")
 ui_rolling_shape = NodePath("RollingShape")
 stage_rolling_shape = NodePath("../SubViewportContainer/SubViewport/Stage/RollingShape")
 stage = NodePath("../SubViewportContainer/SubViewport/Stage")
@@ -35,7 +35,7 @@ time_is_money_panel = NodePath("ScrollContainer/ParameterContainerRight/TimeIsMo
 time_to_money_panel = NodePath("ScrollContainer/ParameterContainerRight/TimeToMoneyPanel")
 color_rect = NodePath("../ColorRect")
 
-[node name="RollingShape" parent="UI" unique_id=842444663 instance=ExtResource("3_ujqnb")]
+[node name="RollingShape" parent="UI" unique_id=842444663 instance=ExtResource("2_muev0")]
 position = Vector2(960, 390)
 scale = Vector2(7, 7)
 freeze = true
@@ -44,7 +44,7 @@ freeze = true
 layout_mode = 0
 offset_right = 171.0
 offset_bottom = 81.0
-theme = ExtResource("3_srqns")
+theme = ExtResource("3_ogp8f")
 bbcode_enabled = true
 text = "[color=gold]  0 G[/color]"
 fit_content = true
@@ -57,8 +57,8 @@ title = "結果発表"
 position = Vector2i(0, 60)
 size = Vector2i(238, 189)
 exclusive = false
-theme = ExtResource("3_srqns")
-script = ExtResource("4_vm625")
+theme = ExtResource("3_ogp8f")
+script = ExtResource("4_63rou")
 label = NodePath("RichTextLabel")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="UI/AcceptDialog" unique_id=677717693]
@@ -72,13 +72,13 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ConvergencePanel" parent="UI" unique_id=1778277509 instance=ExtResource("4_gj8yl")]
+[node name="ConvergencePanel" parent="UI" unique_id=1778277509 instance=ExtResource("5_skip5")]
 layout_mode = 0
 offset_left = 710.0
 offset_top = 240.0
 offset_right = 1210.0
 offset_bottom = 540.0
-parameter = ExtResource("5_qvwwi")
+parameter = ExtResource("6_22eus")
 
 [node name="ParameterContainerLeft2" type="ScrollContainer" parent="UI" unique_id=462975326]
 layout_mode = 0
@@ -91,17 +91,17 @@ offset_bottom = 780.0
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="RocketStartPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=383823316 instance=ExtResource("4_gj8yl")]
+[node name="RocketStartPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=383823316 instance=ExtResource("5_skip5")]
 layout_mode = 2
-parameter = ExtResource("6_wg54h")
+parameter = ExtResource("7_7i1jy")
 
-[node name="TornadoPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=1605377447 instance=ExtResource("4_gj8yl")]
+[node name="TornadoPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=1605377447 instance=ExtResource("5_skip5")]
 layout_mode = 2
-parameter = ExtResource("8_wg54h")
+parameter = ExtResource("8_lugw0")
 
-[node name="IceBallPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=23052154 instance=ExtResource("4_gj8yl")]
+[node name="IceBallPanel" parent="UI/ParameterContainerLeft2/VBoxContainer" unique_id=23052154 instance=ExtResource("5_skip5")]
 layout_mode = 2
-parameter = ExtResource("7_sqdb0")
+parameter = ExtResource("9_v28bg")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="UI" unique_id=1641757638]
 layout_mode = 0
@@ -114,16 +114,16 @@ offset_bottom = 780.0
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="GoldRushPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=2114766098 instance=ExtResource("4_gj8yl")]
+[node name="GoldRushPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=2114766098 instance=ExtResource("5_skip5")]
 layout_mode = 2
-parameter = ExtResource("10_sqdb0")
+parameter = ExtResource("10_3va64")
 
-[node name="TimeIsMoneyPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=1917615371 instance=ExtResource("4_gj8yl")]
+[node name="TimeIsMoneyPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=1917615371 instance=ExtResource("5_skip5")]
 layout_mode = 2
-parameter = ExtResource("11_b2s6v")
+parameter = ExtResource("11_c55v2")
 level = 0
 
-[node name="TimeToMoneyPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=651122796 instance=ExtResource("4_gj8yl")]
+[node name="TimeToMoneyPanel" parent="UI/ScrollContainer/ParameterContainerRight" unique_id=651122796 instance=ExtResource("5_skip5")]
 layout_mode = 2
 level = 0
 
@@ -137,7 +137,7 @@ handle_input_locally = false
 size = Vector2i(1920, 300)
 render_target_update_mode = 4
 
-[node name="Stage" parent="SubViewportContainer/SubViewport" unique_id=977811256 instance=ExtResource("1_0cutk")]
+[node name="Stage" parent="SubViewportContainer/SubViewport" unique_id=977811256 instance=ExtResource("12_modby")]
 
 [node name="FastForwardLabel" parent="SubViewportContainer/SubViewport/Stage/StageUI" parent_id_path=PackedInt32Array(977811256, 2127360230) index="3" unique_id=1800605560]
 offset_left = 1659.0

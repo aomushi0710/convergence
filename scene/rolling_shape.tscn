@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://2i73arvgbv3e"]
 
-[ext_resource type="Script" uid="uid://dfpl3l5220ox4" path="res://component/rolling_shape.gd" id="1_jsvno"]
+[ext_resource type="Script" uid="uid://dfpl3l5220ox4" path="res://script/component/rolling_shape.gd" id="1_jsvno"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_jsvno"]
 bounce = 0.2

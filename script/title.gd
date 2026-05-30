@@ -19,4 +19,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		tween.tween_property(camera_2d, "zoom", Vector2(7, 7), 2)
 		tween.tween_property(camera_2d, "position:y", 650, 2)
 		tween.chain().tween_callback(func(): 
-			get_tree().change_scene_to_file("res://field.tscn"))
+			get_tree().change_scene_to_file("res://scene/field.tscn"))

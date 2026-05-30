@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://dew72b5qrawv0"]
 
-[ext_resource type="PackedScene" uid="uid://2i73arvgbv3e" path="res://rolling_shape.tscn" id="1_6eo5e"]
-[ext_resource type="Script" uid="uid://c0mcr44uv382o" path="res://component/stage.gd" id="1_rnkuw"]
-[ext_resource type="Script" uid="uid://bn3udicqwxqgn" path="res://stage_camera.gd" id="3_16g40"]
-[ext_resource type="Script" uid="uid://tpb63dj4o813" path="res://stage_ui.gd" id="3_gx6sy"]
-[ext_resource type="Script" uid="uid://dd5gcump4xjci" path="res://component/distance_ruler.gd" id="5_16g40"]
+[ext_resource type="PackedScene" uid="uid://2i73arvgbv3e" path="res://scene/rolling_shape.tscn" id="1_6eo5e"]
+[ext_resource type="Script" uid="uid://c0mcr44uv382o" path="res://script/component/stage.gd" id="1_rnkuw"]
+[ext_resource type="Script" uid="uid://bn3udicqwxqgn" path="res://script/stage_camera.gd" id="3_16g40"]
+[ext_resource type="Script" uid="uid://tpb63dj4o813" path="res://script/stage_ui.gd" id="3_gx6sy"]
+[ext_resource type="Script" uid="uid://dd5gcump4xjci" path="res://script/component/distance_ruler.gd" id="5_16g40"]
 [ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="6_vpggq"]
 
 [sub_resource type="Gradient" id="Gradient_rnkuw"]

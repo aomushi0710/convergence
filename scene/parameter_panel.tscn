@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bsxi8ed7sfnof"]
 
 [ext_resource type="Theme" uid="uid://baaqp8utcupfe" path="res://theme/default_font_theme.tres" id="1_gh725"]
-[ext_resource type="Script" uid="uid://bb1fsihpxlucd" path="res://component/parameter_panel.gd" id="2_hjsf8"]
+[ext_resource type="Script" uid="uid://bb1fsihpxlucd" path="res://script/component/parameter_panel.gd" id="2_hjsf8"]
 [ext_resource type="Resource" uid="uid://bo4kduwe3tje7" path="res://parameter/time_to_money.tres" id="3_hjsf8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_etyvt"]
