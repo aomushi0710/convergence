@@ -1,6 +1,8 @@
 # convergence
 インクリメンタル型2Dシミュレーションゲーム<br>
 Godot Japan Game Jam 2026 参加作品
+<img src="https://i.imgur.com/9zgHLBh.png" title="タイトル画面">
+
 
 [Godot Japan Game Jam 2026 公式ページ](https://godot-japan.com/game-jam/)
 
