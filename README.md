@@ -2,15 +2,11 @@
 インクリメンタル型2Dシミュレーションゲーム<br>
 Godot Japan Game Jam 2026 参加作品
 
-Godot Japan Game Jam 2026 公式ページ<br>
-https://godot-japan.com/game-jam/
+[Godot Japan Game Jam 2026 公式ページ](https://godot-japan.com/game-jam/)
 
 ### 公開URL
-最新バージョンはこちらからプレイ可能です<br>
-https://unityroom.com/games/convergence
-
-Godot Japan Game Jam 2026に提出させていただいた初期バージョンはこちらからプレイ可能です<br>
-https://godotplayer.com/games/convergence
+最新バージョンは[unityroom](https://unityroom.com/games/convergence)にてプレイ可能です<br>
+Godot Japan Game Jam 2026に提出させていただいた初期バージョンは[godotplayer](https://godotplayer.com/games/convergence)にてプレイ可能です
 
 ### 工夫した点
 - Polygon2Dノードを利用して、様々な多角形の図形を動的に表現
@@ -21,3 +17,15 @@ https://godotplayer.com/games/convergence
 ### 改善したい点
 - 後半のレベルアップに必要な通貨量の増加に対し、距離の伸びを実感しにくくなってしまう現状のゲームバランスの是正
 - モバイルでの操作時、パラメータ一覧のシークバーを用いなければ上下スクロールが行えない問題
+
+### 開発環境
+<table>
+  <tr>
+    <td>ゲームエンジン</td>
+    <td>Godot Engine 4.6.2 stable</td>
+  </tr>
+  <tr>
+    <td>統合開発環境</td>
+    <td>Godot内蔵スクリプトエディタ</td>
+  </tr>
+</table>
