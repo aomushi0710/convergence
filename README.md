@@ -7,6 +7,8 @@ Godot Japan Game Jam 2026 参加作品
 [Godot Japan Game Jam 2026 公式ページ](https://godot-japan.com/game-jam/)
 
 ### 公開URL
+[動作紹介動画(Youtube)](https://youtu.be/atfe3Zbu8nw)<br>
+
 最新バージョンは[unityroom](https://unityroom.com/games/convergence)にてプレイ可能です<br>
 Godot Japan Game Jam 2026に提出させていただいた初期バージョンは[godotplayer](https://godotplayer.com/games/convergence)にてプレイ可能です
 
